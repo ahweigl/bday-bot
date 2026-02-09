@@ -1,2 +1,2 @@
 # bday-bot
-A free and lightweight alternative to BirthdayBot for automated Slackbot birthday notifications via Google Sheets
+A (free!) alternative to BirthdayBot for automated Slackbot birthday notifications integrated with Google Sheets.
