@@ -18,6 +18,7 @@ function requireEnv(name: string): string {
 
 console.log("Validating environment variables...");
 
+const FORCE_RUN = process.env.FORCE_RUN === "true";
 const SLACK_BOT_TOKEN = requireEnv("SLACK_BOT_TOKEN");
 const SLACK_CHANNEL_ID = requireEnv("SLACK_CHANNEL_ID");
 const SPREADSHEET_ID = requireEnv("SPREADSHEET_ID");
@@ -88,9 +89,13 @@ async function sendBirthdayMessage(name: string) {
 async function main() {
     console.log("Bday bot starting...");
 
-    if (!isMidnightET()) {
+    if (!FORCE_RUN && !isMidnightET()) {
         console.log("Not midnight ET, exiting...");
         return;
+    }
+
+    if (FORCE_RUN) {
+        console.log("Forcing run for testing...");
     }
 
     console.log("Checking birthdays!");
