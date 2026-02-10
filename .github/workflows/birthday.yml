@@ -1,8 +1,9 @@
-name: Birthday Slackbot
+name: Birthday Slackbot 🎂
 
 on:
   schedule:
-    - cron: "0 * * * *" # run every hour
+    - cron: "0 * * * *"
+
   workflow_dispatch:
 
 jobs:
@@ -10,20 +11,25 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v4
 
-      - name: Setup Node
+      - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: "npm"
 
       - name: Install dependencies
         run: npm install
 
-      - name: Run bot
+      - name: Build TypeScript
+        run: npm run build
+
+      - name: Run birthday bot
         env:
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
           SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
           SPREADSHEET_ID: ${{ secrets.SPREADSHEET_ID }}
           GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
-        run: npx ts-node src/bdayBot.ts
+        run: node dist/bdayBot.js

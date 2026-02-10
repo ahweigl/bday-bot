@@ -5,9 +5,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "npx eslint .",
-    "dev": "ts-node src/bdayBot.ts"
+    "build": "tsc",
+    "dev": "ts-node src/bdayBot.ts",
+    "lint": "npx eslint ."
   },
   "keywords": [],
   "author": "",
@@ -24,6 +24,6 @@
     "@typescript-eslint/parser": "^6.21.0",
     "eslint": "^8.40.0",
     "ts-node": "^10.9.1",
-    "typescript": "^5.1.3"
+    "typescript": "^5.9.3"
   }
 }
